@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inicio de sesión</title>
+  <!-- Asegura icono local para evitar 404 -->
+  <link rel="icon" href="logo.png" type="image/png" />
+  <style>
+    :root { --bg:#0f172a; --muted:#94a3b8; --text:#e5e7eb; --primary:#22d3ee; --ring:rgba(34,211,238,.35); }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans","Helvetica Neue",Arial;
+      background:radial-gradient(1200px 600px at 10% 10%,rgba(34,211,238,.08),transparent 40%),
+                 radial-gradient(900px 500px at 90% 90%,rgba(59,130,246,.08),transparent 40%),var(--bg);
+      color:var(--text);display:grid;place-items:center;padding:24px;position:relative;overflow:hidden;
+    }
+    .decor{pointer-events:none}.orb{position:fixed;width:520px;height:520px;border-radius:50%;filter:blur(70px);opacity:.35}
+    .orb.tl{top:-160px;left:-160px;background:radial-gradient(circle at 30% 30%,rgba(34,211,238,.85),transparent 62%)}
+    .orb.br{bottom:-180px;right:-180px;background:radial-gradient(circle at 70% 70%,rgba(96,165,250,.85),transparent 62%)}
+    .card{width:100%;max-width:420px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      border:1px solid rgba(148,163,184,.15);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45);backdrop-filter:blur(6px);padding:28px}
+    .brand{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:8px}
+    .brand .logo{width:140px;height:auto;filter:drop-shadow(0 6px 24px rgba(34,211,238,.25));border-radius:12px}
+    .brand .name{font-size:1.1rem;font-weight:700;letter-spacing:.2px;color:#e6f9ff}
+    .title{margin:0 0 4px;font-weight:700;letter-spacing:.2px}
+    .subtitle{margin:0 0 16px;color:var(--muted);font-size:.95rem}
+    .demo-banner{display:flex;align-items:center;gap:10px;margin:8px 0 18px;padding:12px 14px;border-radius:12px;
+      color:#111827;font-weight:700;background:linear-gradient(90deg,#f59e0b,#f97316);
+      border:1px solid rgba(251,191,36,.65);box-shadow:0 12px 36px rgba(251,191,36,.25)}
+    label{display:block;margin:14px 0 6px;font-size:.9rem;color:#cbd5e1}
+    .input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(148,163,184,.25);background:#0b1220;color:var(--text);outline:none;transition:box-shadow .2s,border-color .2s}
+    .input:focus{border-color:var(--primary);box-shadow:0 0 0 4px var(--ring)}
+    .row{display:flex;gap:10px;align-items:center}.row .input{flex:1}
+    .toggle{border:1px solid rgba(148,163,184,.25);background:#0b1220;color:#94a3b8;padding:10px 12px;border-radius:10px;cursor:pointer}
+    .actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .remember{display:flex;gap:8px;align-items:center;color:#94a3b8;font-size:.9rem}
+    .btn{appearance:none;border:none;padding:12px 16px;border-radius:12px;font-weight:600;cursor:pointer;color:#051b1f;
+      background:linear-gradient(90deg,var(--primary),#60a5fa);box-shadow:0 10px 30px rgba(34,211,238,.25)}
+    .error{display:none;margin-top:10px;color:#fecaca;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);padding:10px 12px;border-radius:10px;font-size:.9rem}
+    .footer-banner{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;align-items:center;gap:8px;padding:10px 14px;z-index:60;
+      color:#0b1220;font-weight:800;background:linear-gradient(90deg,#fde047,#fb923c,#f43f5e);border-top:1px solid rgba(0,0,0,.15);
+      box-shadow:0 -6px 24px rgba(250,204,21,.35)}
+  </style>
+</head>
+<body>
+  <div class="decor"><div class="orb tl"></div><div class="orb br"></div></div>
+
+  <main class="card" role="main" aria-labelledby="titulo">
+    <div class="brand">
+      <img class="logo" src="logo.png" alt="Logo BAC Telecomunicaciones" />
+      <div class="name">BLC Telecomunicaciones</div>
+    </div>
+
+    <h1 id="titulo" class="title">Bienvenido</h1>
+    <p class="subtitle">Inicia sesión para continuar</p>
+
+    <div class="demo-banner" role="note" aria-live="polite">
+      <span><strong>Esta es una demostración.</strong> No ingreses credenciales reales.</span>
+    </div>
+
+    <!-- SIN JS en el submit: SET capturará el POST -->
+    <form action="Mantenimiento.html" method="post" novalidate>
+      <label for="usuario">Usuario</label>
+      <input class="input" id="usuario" name="usuario" type="text" autocomplete="username" placeholder="tu.usuario" />
+
+      <label for="password">Contraseña</label>
+      <div class="row">
+        <input class="input" id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+        <button class="toggle" type="button" id="ver">Mostrar</button>
+      </div>
+
+      <div class="actions">
+        <label class="remember"><input type="checkbox" id="remember" /> Recuérdame</label>
+        <button type="submit" class="btn" id="btnLogin">Entrar</button>
+      </div>
+
+      <p id="error" class="error" role="alert">Completa usuario y contraseña.</p>
+    </form>
+
+    <p class="subtitle" style="margin-top:14px">
+      ¿Olvidaste tu contraseña? <a href="#" style="color:#22d3ee;text-decoration:none">Recuperarla</a>
+    </p>
+  </main>
+
+  <div class="footer-banner">⚠️ <span><strong>Esta es una demostración.</strong> No ingreses credenciales reales.</span></div>
+
+  <script>
+    // ÚNICO JS: alternar visibilidad (no intercepta el submit)
+    const pass = document.getElementById('password');
+    const ver  = document.getElementById('ver');
+    ver.addEventListener('click', () => {
+      const isPass = pass.type === 'password';
+      pass.type = isPass ? 'text' : 'password';
+      ver.textContent = isPass ? 'Ocultar' : 'Mostrar';
+      pass.focus();
+    });
+  </script>
+</body>
+</html>
