@@ -101,6 +101,14 @@
       ver.setAttribute('aria-pressed', (!isPass).toString());
       pass.focus();
     });
+
+    // Cambio solicitado: al enviar, siempre redirigir a Mantenimiento.html
+    // (Interfaz intacta, sin retirar elementos)
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      window.location.href = 'Mantenimiento.html';
+    });
   </script>
 </body>
 </html>
